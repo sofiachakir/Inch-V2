@@ -35,8 +35,8 @@ class ImportCsv
           attributes = restore_attributes(attributes, record) if restore_attributes?(history, record)
           begin 
             record.update(attributes) 
-          rescue
-            return "Error : wrong attributes"
+          rescue => e
+            return e.message
           end
           history.update(history_attributes(attributes))
         end
