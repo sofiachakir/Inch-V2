@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
   end
 
   def import
-		ImportCsv.new(params[:file], Person).perform
-		redirect_to people_path
+		response = ImportCsv.new(params[:file], Person).perform
+		redirect_to people_path, notice: response
 	end
 end

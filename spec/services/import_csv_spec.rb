@@ -30,16 +30,22 @@ RSpec.describe ImportCsv do
 
     describe 'Building data with People model' do 
       let(:model) { Person }
-      it 'should raise an error' do
-        expect{subject}.to raise_error(ActiveModel::UnknownAttributeError)
+      it 'should not raise an error' do
+        expect{subject}.not_to raise_error
+      end
+      it 'should return error message' do
+        expect(subject).to eq('Error : wrong attributes')
       end
     end
 
     describe 'People data with Building model' do 
       let(:file) { File.open('spec/fixtures/people.csv') }
       let(:model) { Building }
-      it 'should raise an error' do
-        expect{subject}.to raise_error(ActiveModel::UnknownAttributeError)
+      it 'should not raise an error' do
+        expect{subject}.not_to raise_error
+      end
+      it 'should return error message' do
+        expect(subject).to eq('Error : wrong attributes')
       end
     end
 

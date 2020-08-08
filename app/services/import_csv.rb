@@ -30,8 +30,15 @@ class ImportCsv
         CSV.foreach(file.path, headers: true) do |row|
           attributes = row.to_hash
           record = @model.find_or_initialize_by(reference: attributes['reference'])
-          attributes = transform_attributes(attributes, record)
-          record.update(attributes) 
+          history = history(record)
+                .find_or_initialize_by(history_attributes(attributes))
+          attributes = restore_attributes(attributes, record) if restore_attributes?(history, record)
+          begin 
+            record.update(attributes) 
+          rescue
+            return "Error : wrong attributes"
+          end
+          history.update(history_attributes(attributes))
         end
       end
     end
@@ -39,16 +46,6 @@ class ImportCsv
 
   # Private methods
   private
-
-  # Returns transformed attributes if record already exists
-  # And has a history record with same values
-  def transform_attributes(attributes, record)
-    history = history(record)
-                .find_or_initialize_by(history_attributes(attributes))
-    attributes = restore_attributes(attributes, record) if restore_attributes?(history, record)
-    history.update(history_attributes(attributes))
-    attributes
-  end
 
   # Get the record history depending on the model
   def history(record)

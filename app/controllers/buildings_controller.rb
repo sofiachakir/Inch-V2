@@ -4,7 +4,7 @@ class BuildingsController < ApplicationController
   end
 
   def import
-		ImportCsv.new(params[:file], Building).perform
-		redirect_to buildings_path
+		response = ImportCsv.new(params[:file], Building).perform
+		redirect_to buildings_path, notice: response
 	end
 end
