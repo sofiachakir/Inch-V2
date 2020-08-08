@@ -1,0 +1,36 @@
+<div class="container my-5">
+  
+  <h2 class="mb-5">People</h2>
+
+  <div>
+    <h4 class="mb-3">Import people data from CSV</h4>
+    <%= form_tag import_people_path, multipart: true do %>
+      <%= file_field_tag :file , required: true %>
+      <%= submit_tag "Import CSV" %>
+    <% end %>
+  </div>
+
+  <hr class="my-4">
+
+  <h4 class="mb-3">Current people</h4>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Email</th>
+          <th>Home Phone Number</th>
+          <th>Mobile Phone Number</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render(@people) || "There are no people yet." %>
+      </tbody>
+    </table>
+    <br>
+  </div>
+
+</div>
