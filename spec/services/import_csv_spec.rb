@@ -34,7 +34,7 @@ RSpec.describe ImportCsv do
         expect{subject}.not_to raise_error
       end
       it 'should return error message' do
-        expect(subject).to eq('Error : wrong attributes')
+        expect(subject).to eq("unknown attribute 'zip_code' for Person.")
       end
     end
 
@@ -45,7 +45,7 @@ RSpec.describe ImportCsv do
         expect{subject}.not_to raise_error
       end
       it 'should return error message' do
-        expect(subject).to eq('Error : wrong attributes')
+        expect(subject).to eq("unknown attribute 'firstname' for Building.")
       end
     end
 
