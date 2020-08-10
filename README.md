@@ -22,15 +22,15 @@ The requested feature can be found in `app/services/import_csv.rb`.
 This service can process import for buildings data as well as for people data.
 To create a new import, provide a file path and a Model (`Person` or `Building`), and call the `ImportCsv` class `perform` method.
 ```
-ImportCsv.new(file_path, Building).perform
+ImportCsv.new(file_path, Model).perform
 ```
 
 Regarding test step 2:
-- For `Building` model, the `manager_name` attributes will be overwritten by the csv import only if the value provided in the csv has never been a value of that field.
+- For `Building` model, the `manager_name` attribute will be overwritten by the csv import only if the value provided in the csv has never been a value of that field.
 - But for `Person` model, the `email`, `home_phone_number`, `mobile_phone_number` and `address` will all be overwritten by the csv import, only if all of them have never been a value of the fields.
 
 ### Tests
-Tests written only for the service to check expected results given the input files.
+I have written tests only for the service to check expected results given the input files.
 
 
 ## Versions :
